@@ -215,3 +215,81 @@ new Function<Object[], R>() {
   }
 }
 ```
+
+## Misc.
+
+### `rx.Observable.OnSubscribe<T>` to `ObservableOnSubscribe<T>`
+### `rx.Subscription` to `Disposable`
+### `BehaviorSubject.create("defaultValue")` to `BehaviorSubject.createDefault("defaultValue")`
+### `Schedulers.immediate()` to `Schedulers.trampoline()`
+### `TestSubscriber<T>` to `TestObserver<T>`
+
+Before:
+
+```kt
+val subscriber = TestSubscriber<List<Any>>()
+store.asObservable().subscribe(subscriber)
+
+store.dispatch(Fire1)
+store.dispatch(Fire2)
+
+scheduler.advanceTimeBy(500L, MILLISECONDS)
+
+subscriber.assertValues(
+    listOf(
+        INIT,
+        Fire1
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2,
+        Action1
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2,
+        Action1,
+        Action2
+    )
+)
+```
+
+After:
+
+```kt
+val testObserver = store.asObservable().test()
+
+// ...
+
+testObserver.assertValues(
+    listOf(
+        INIT,
+        Fire1
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2,
+        Action1
+    ),
+    listOf(
+        INIT,
+        Fire1,
+        Fire2,
+        Action1,
+        Action2
+    )
+)
+```
