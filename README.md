@@ -293,3 +293,27 @@ testObserver.assertValues(
     )
 )
 ```
+
+### `RxPlugins.getInstance()` to `RxPlugins`
+
+Before:
+
+```kt
+RxJavaPlugins.getInstance().reset()
+RxJavaPlugins.getInstance().registerErrorHandler(RxJavaPlugins.DEFAULT_ERROR_HANDLER)
+
+RxJavaPlugins.getInstance().registerSchedulersHook(SynchronousSchedulersHook())
+
+//RxJavaPlugins.getInstance().registerObservableExecutionHook(RxJavaObservableExecutionHookDefault.getInstance())
+```
+
+After:
+
+```kt
+RxJavaPlugins.reset()
+RxJavaPlugins.setErrorHandler {}
+
+RxJavaPlugins.setComputationSchedulerHandler { null }
+RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
+RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
+```
