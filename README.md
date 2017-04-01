@@ -317,3 +317,5 @@ RxJavaPlugins.setComputationSchedulerHandler { null }
 RxJavaPlugins.setIoSchedulerHandler { Schedulers.trampoline() }
 RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
 ```
+
+### `CompositeSubscription` to `CompositeDisposable`
