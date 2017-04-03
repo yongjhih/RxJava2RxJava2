@@ -319,3 +319,26 @@ RxJavaPlugins.setNewThreadSchedulerHandler { Schedulers.trampoline() }
 ```
 
 ### `CompositeSubscription` to `CompositeDisposable`
+
+### `onErrorResumeNext(Function2<Throwable, Observable<T>>)` to `onErrorResumeNext(Function2<Throwable, ObservableSource<T>>)`
+
+Before:
+
+```java
+onErrorResumeNext(e -> { Observable.empty() })
+```
+
+After (do nothing):
+
+```java
+onErrorReturn(Observable.empty())
+```
+
+After:
+
+```kt
+onErrorResumeNext { e: Throwable ->
+  // do something
+  Observable.empty()
+}
+```
