@@ -197,9 +197,9 @@ new Action<Object[]>() {
 Before:
 
 ```java
-new Func3<String, Integer, Boolean>() {
+new Func3<String, Integer, Float, Boolean>() {
   @Override
-  public Boolean call(String text, Integer i) {
+  public Boolean call(String text, Integer i, Float f) {
     return true;
   }
 }
