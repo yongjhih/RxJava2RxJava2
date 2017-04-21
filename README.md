@@ -342,3 +342,18 @@ onErrorResumeNext { e: Throwable ->
   Observable.empty()
 }
 ```
+
+### `Notification.hasThrowable()` to `Notification.isOnError()` & `Notification.getThrowable()` to `Notification.getError()`
+
+
+Before:
+
+```java
+notification.hasThrowable() && notification.getThrowable().getClass().isAssignableFrom(errorClazz);
+```
+
+After:
+
+```java
+notification.isOnError() && notification.getError().getClass().isAssignableFrom(errorClazz);
+```
