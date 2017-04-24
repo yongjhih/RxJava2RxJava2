@@ -357,3 +357,7 @@ After:
 ```java
 notification.isOnError() && notification.getError().getClass().isAssignableFrom(errorClazz);
 ```
+
+## See Also
+
+* https://github.com/amitshekhariitbhu/RxJava2-Android-Samples
